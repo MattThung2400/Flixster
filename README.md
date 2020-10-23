@@ -42,21 +42,21 @@ Describe any challenges encountered while building the app.
 - [x] (10pts) User can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API.
 
 #### BONUS
-- [ ] (2pts) Views should be responsive for both landscape/portrait mode.
-   - [ ] (1pt) In portrait mode, the poster image, title, and movie overview is shown.
-   - [ ] (1pt) In landscape mode, the rotated alternate layout should use the backdrop image instead and show the title and movie overview to the right of it.
+- [x] (2pts) Views should be responsive for both landscape/portrait mode.
+   - [x] (1pt) In portrait mode, the poster image, title, and movie overview is shown.
+   - [x] (1pt) In landscape mode, the rotated alternate layout should use the backdrop image instead and show the title and movie overview to the right of it.
 
-- [ ] (2pts) Display a nice default [placeholder graphic](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
+- [x] (2pts) Display a nice default [placeholder graphic](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
 - [ ] (2pts) Improved the user interface by experimenting with styling and coloring.
 - [ ] (2pts) For popular movies (i.e. a movie voted for more than 5 stars), the full backdrop image is displayed. Otherwise, a poster image, the movie title, and overview is listed. Use Heterogenous RecyclerViews and use different ViewHolder layout files for popular movies and less popular ones.
 
 ### App Walkthough GIF
-`TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
+<img src="FlixterPortrait.gif" width=250><br>
+<img src="FlixterLandscape.gif"><br>
 
-<img src="YOUR_GIF_URL_HERE" width=250><br>
 
 ### Notes
-Describe any challenges encountered while building the app.
+During the first part of this assignment, I did have a little bit of trouble formatting my design in a manner such that the text was not overflowing onto the next section (for portrait mode). I decided to use the 'maxHeight' and 'maxLines' properties to fix this issue. As developers, we need to be aware of the size of the data that we are trying to display, and subsequently code for fringe cases where we have too much or too little data.
 
 ### Open-source libraries used
 
