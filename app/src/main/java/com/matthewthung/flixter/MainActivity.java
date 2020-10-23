@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     // CONSTANTS:
     public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     public static final String TAG = "MainActivity";
+    RelativeLayout rLayout;
 
     // VARIABLES;
     List<Movie> movies;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
+
+        rLayout = findViewById(R.id.relativeLayout);
+        rLayout.setBackgroundColor(0xFF131111);
 
         // Create the adapter...
         final MovieAdapter movieAdapter = new MovieAdapter(this, movies);
