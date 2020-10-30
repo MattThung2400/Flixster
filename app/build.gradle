@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    dataBinding.enabled = true
 
     defaultConfig {
         applicationId "com.matthewthung.flixter"
@@ -29,7 +30,10 @@ dependencies {
     implementation 'com.codepath.libraries:asynchttpclient:2.0.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'org.parceler:parceler-api:1.1.12'
+    implementation files('libs\\YouTubeAndroidPlayerApi.jar')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

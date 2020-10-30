@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -39,8 +41,18 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
 
-        rLayout = findViewById(R.id.relativeLayout);
+        rLayout = findViewById(R.id.rlContainer);
         rLayout.setBackgroundColor(0xFF131111);
+
+        // For transition element (to ignore UI):
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+
+        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(fade);
 
         // Create the adapter...
         final MovieAdapter movieAdapter = new MovieAdapter(this, movies);

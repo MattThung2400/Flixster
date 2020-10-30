@@ -1,24 +1,37 @@
 package com.matthewthung.flixter.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.matthewthung.flixter.DetailActivity;
 import com.matthewthung.flixter.R;
 import com.matthewthung.flixter.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
+    // CONSTANTS:
+    int RAD = 30;     // This is a radius margin for rounding image corners.
+
+    // Variables:
     Context context;
     List<Movie> movies;
 
@@ -53,6 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
@@ -62,12 +76,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.rlContainer);
         }
 
-        public void bind(Movie movie) {
+        public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
-            String imageUrl = "";
+            String imageUrl;
 
             // If the phone is in landscape
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -79,10 +94,26 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             }
 
             Glide.with(context)
-                    .load(movie.getPosterPath())
+                    .load(imageUrl)
+                    .transform(new RoundedCorners(RAD))
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.imagenotfound)
+
                     .into(ivPoster);
+
+            // 1.) Register click listener on the whole container...
+            // 2.) Navigate to a new activity on tap...
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, DetailActivity.class);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, ivPoster, ViewCompat.getTransitionName(ivPoster));
+                    i.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(i, options.toBundle());
+                }
+            });
+
+
 
         }
     }
