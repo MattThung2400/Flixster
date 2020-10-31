@@ -1,6 +1,7 @@
 package com.matthewthung.flixter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.matthewthung.flixter.adapters.MovieAdapter;
+import com.matthewthung.flixter.databinding.ActivityMainBinding;
 import com.matthewthung.flixter.models.Movie;
 
 import org.json.JSONArray;
@@ -29,20 +31,18 @@ public class MainActivity extends AppCompatActivity {
     // CONSTANTS:
     public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     public static final String TAG = "MainActivity";
-    RelativeLayout rLayout;
 
     // VARIABLES;
+    private ActivityMainBinding binding;
     List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         movies = new ArrayList<>();
 
-        rLayout = findViewById(R.id.rlContainer);
-        rLayout.setBackgroundColor(0xFF131111);
+        binding.rlContainer.setBackgroundColor(0xFF131111);
 
         // For transition element (to ignore UI):
         Fade fade = new Fade();
@@ -58,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
         final MovieAdapter movieAdapter = new MovieAdapter(this, movies);
 
         // Set the adapter on the RecyclerView...
-        rvMovies.setAdapter(movieAdapter);
+        binding.rvMovies.setAdapter(movieAdapter);
 
         // Set a layout manager on the RecyclerView...
-        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {

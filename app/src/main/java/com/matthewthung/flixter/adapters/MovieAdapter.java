@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +30,7 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     // CONSTANTS:
-    int RAD = 30;     // This is a radius margin for rounding image corners.
+    final int RAD = 30;            // This is a radius margin for rounding image corners.
 
     // Variables:
     Context context;
@@ -64,7 +65,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         return movies.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder  extends RecyclerView.ViewHolder{
 
         RelativeLayout container;
         TextView tvTitle;
@@ -98,7 +99,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     .transform(new RoundedCorners(RAD))
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.imagenotfound)
-
                     .into(ivPoster);
 
             // 1.) Register click listener on the whole container...
